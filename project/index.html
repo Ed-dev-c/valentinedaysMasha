@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Валентинка</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(#ffccd5, #ffe6eb);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Экран открытия */
+#startScreen {
+    text-align: center;
+}
+
+button {
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    font-size: 20px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+/* Валентинка */
+.card {
+    display: none;
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.card img {
+    max-width: 300px;
+    border-radius: 15px;
+    margin: 15px 0;
+}
+
+.message {
+    font-size: 18px;
+}
+
+/* Сердечки */
+.heart {
+    position: absolute;
+    color: red;
+    font-size: 20px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(-10vh);
+    }
+    to {
+        transform: translateY(110vh);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="startScreen">
+    <h1>💌 У тебя валентинка</h1>
+    <button onclick="openCard()">Открыть валентинку</button>
+</div>
+
+<div class="card" id="card">
+    <h2>С 14 февраля ❤️</h2>
+
+    <!-- Путь к изображению -->
+    <img src="img/photo_2026-01-27_14-12-31.jpg" alt="Фото">
+
+    </p>
+</div>
+
+<script>
+function openCard() {
+    document.getElementById("startScreen").style.display = "none";
+    document.getElementById("card").style.display = "block";
+    startHearts();
+}
+
+function startHearts() {
+    setInterval(createHeart, 300);
+}
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.animationDuration = (3 + Math.random() * 4) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 7000);
+}
+</script>
+
+</body>
+</html>
